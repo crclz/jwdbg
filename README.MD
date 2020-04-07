@@ -15,6 +15,10 @@
 - python3.7+
 - 需要pyyaml模块 `pip install pyyaml`
 
+## 傻瓜式运行测试（以jw4为例）
+1. 拷贝`jwdbg.py`和`case1.yml`到一堆.class那个目录下
+2. 命令行进入那个目录，运行`python .\jwdbg.py -cmd "java Test" -case case1.yml`
+
 ## 运行测试
 `python .\jwdbg.py -cmd "java Test" -case case1.yml`
 
