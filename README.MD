@@ -12,6 +12,7 @@
 - 以yaml的方式书写测试数据，可读性高，易于扩展
 
 ## 运行测试
+python要求：python3.7+
 `python .\jwdbg.py -cmd "java Test" -case case1.yml`
 `-case`：测试用例文件
 `-cmd`: 运行目标程序的命令。
