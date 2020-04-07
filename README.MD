@@ -47,8 +47,8 @@
 测试数据的结构，用json来表示，则是：
 ```json
 {
-    name: "my test data",
-    data: [
+    "name": "my test data",
+    "data": [
         "SUDO",// 单行输入，无输出
         ["input1","output1"],// 单行输入，单行输出
         ["input2","output2\naaaaaaaa"],// 单行输入，多行输出
