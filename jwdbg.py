@@ -83,9 +83,9 @@ for item in testcase['data']:
 
             if expected != actual_line:
                 ok = False
-                print(">>> line mismatch.")
-                print(f">>> expected: {expected}")
-                print(f">>> actual: {actual_line}")
+                print("line mismatch.")
+                print(f">>> expected:\t{expected}")
+                print(f">>> actual:\t{actual_line}")
                 break
             cursor += 1
 
@@ -94,13 +94,29 @@ for item in testcase['data']:
 
     tc_cursor += 1
 
-if ok:
-    print("test passed")
-else:
+if not ok:
     print("test failed")
-    print("The last input of the following line met the error:")
+    print("The last command of the following lines caused the error. Please copy to debug your code.")
     print()
-    input_lines = input_str.splitlines(keepends=True)
-
+    input_lines = input_str.splitlines(keepends=False)
     for l in input_lines[:tc_cursor+1]:
-        print(l, end='')
+        print(l)
+    exit(2)
+
+if len(actual_lines) != len(expected_lines):
+    print("test failed")
+    print("last command output line count mismatch")
+    print("========")
+    print("expected:")
+    for l in expected_lines[cursor:]:
+        print(l)
+
+    print("========")
+    print("The last command(which has output) of the following lines caused the error. Please copy to debug your code.")
+    input_lines = input_str.splitlines(keepends=False)
+    for l in input_lines:
+        print(l)
+    exit(3)
+
+print('test passed!')
+exit(0)

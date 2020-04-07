@@ -2,5 +2,5 @@ data:
   - SUDO # enter admin mode
   -
     - np -t as as asssd s
-    - ID illegala.
+    - ID illegally.
   - QUIT # quit
