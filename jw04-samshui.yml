@@ -53,4 +53,59 @@ data:
     - np -s KP 110101199003076835 10000001
     - Add student success.
   - back
+  # sudo part end
+
+  # login part
+  -
+    - login -t 11010119900307109X 10
+    - Login Error. Your ID or password maybe wrong.
+  -
+    - login -t 11010119900307109 a12345
+    - Login Error. Your ID or password maybe wrong.
+  -
+    - login -t 110101199003078937 a12345
+    - Login Error. Your ID or password maybe wrong.
+  -
+    - login -t 11010119900307109X a12345
+    - Login success.
+  -
+    - myinfo
+    - |
+      Name:Wang
+      IDNum:11010119900307109X
+      TID:10000
+      Sex:M
+      Birthday:1990/03/07
+  -
+    - chgpw 123456 123456
+    - Password illegal.
+  -
+    - chgpw a123 a123
+    - Password illegal.
+  -
+    - chgpw abcdefg123456789012 abcdefg123456789012
+    - Password illegal.
+  -
+    - chgpw abcdefghi123456789 abcdefghi123456789
+    - Password changed successfully.
+  - back # back
+  -
+    - login -s 110101199003076835 a12345
+    - Login success.
+  -
+    - myinfo
+    - |
+      Name:KP
+      IDNum:110101199003076835
+      SID:10000001
+      Sex:M
+      Birthday:1990/03/07
+  -
+    - chgpw abc123 abc123
+    - Password changed successfully.
+
+  - back
+  
+  # login part end
+  
   - QUIT
