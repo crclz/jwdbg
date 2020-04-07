@@ -1,4 +1,13 @@
+name: crclz's jw04 commandline test data
+
 data:
+  - SUDO
+  - back
+  - SUDO
+  - back
+  - SUDO
+  - back
+
   - SUDO # enter admin mode
   -
     - np -t a1 123213 123 # 现在所有信息都非法，但是首先应当判断id。以下同理。

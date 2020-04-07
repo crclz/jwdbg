@@ -8,6 +8,7 @@ case_file = './case1.yml'
 with open(case_file, 'r', encoding="utf-8") as f:
     testcase = yaml.load(f, Loader=yaml.SafeLoader)
 
+print(f"test name: {testcase['name']}")
 
 # get input and output lines from test data
 # make sure each item of these 2 lists does not end with \n, \r\n (by calling strip())
