@@ -1,6 +1,46 @@
 data:
   - SUDO # enter admin mode
   -
-    - np -t as as asssd s
-    - ID illegally.
+    - np -t a1 123213 123
+    - ID illegal. # 现在所有信息都非法，但是首先应当判断id。以下同理。
+  -
+    - np -t lst 53010219200508011x 55864 # 新建教师记录 （合法，便于测试下一条的身份证重复）===============
+    - Add teacher success.
+  -
+    - np -t lst 53010219200508011x 558640 # id已存在
+    - ID exists.
+  -
+    - np -t lst1 110101199003076050 558640 # "lst1" 包含了数字；身份证用这个生成的 http://sfz.uzuzuz.com/
+    - Name illegal.
+  -
+    - np -t lst 110101199003076050 558640 # 
+    - TID illegal.
+  -
+    - np -t lst 110101199003076050 55864
+    - TID exists.
+  
+  # 接下来是添加学生的测试
+  -
+    - np -s a1 123213 123
+    - ID illegal.
+  -
+    - np -s lst 110101199003074311 18371234 # 新建学生记录（合法）========================
+    - Add student success.
+  -
+    - np -s lst 53010219200508011x 1837123 # id已存在 （被之前的教师占用了）
+    - ID exists.
+  -
+    - np -s lst 110101199003074311 1837123 # id已存在 （被之前的学生占用了）
+    - ID exists.
+  -
+    - np -s aa1 110101199003073490 123 # 姓名非法
+    - Name illegal.
+  -
+    - np -s aa 110101199003073490 1837123 # 学号非法
+    - SID illegal.
+  -
+    - np -s aa 110101199003073490 18371234 # 学号已存在
+    - SID exists.
+
+
   - QUIT # quit

@@ -5,7 +5,7 @@ import io
 
 case_file = './case1.yml'
 
-with open(case_file) as f:
+with open(case_file, 'r', encoding="utf-8") as f:
     testcase = yaml.load(f, Loader=yaml.SafeLoader)
 
 
