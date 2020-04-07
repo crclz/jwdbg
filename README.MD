@@ -11,12 +11,19 @@
 - 如果不能输出指定内容，会给出期望输出与实际输出的比较，并提供（直到出错命令的）输入数据进行检验，可以方便用于IDE调试
 - 以yaml的方式书写测试数据，可读性高，易于扩展
 
+## 前提条件
+- python3.7+
+- 需要pyyaml模块 `pip install pyyaml`
+
 ## 运行测试
-python要求：python3.7+
 `python .\jwdbg.py -cmd "java Test" -case case1.yml`
+
 `-case`：测试用例文件
+
 `-cmd`: 运行目标程序的命令。
+
 **注意！** 建议在java文件的生成目录下运行。即：以java生成目录为工作目录运行本测试程序。因为要照顾到java，因为java的classpath依赖于当前目录的位置。
+
 所以，建议把这个测试程序拷贝到java生成目录（一堆.class）里去。
 
 ## 阅读测试结果
