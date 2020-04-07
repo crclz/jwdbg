@@ -1,0 +1,6 @@
+data:
+  - SUDO # enter admin mode
+  -
+    - np -t as as asssd s
+    - ID illegal.
+  - QUIT # quit
