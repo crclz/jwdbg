@@ -1,0 +1,56 @@
+name: jw04 data from @samshui
+
+data:
+  # SUDO 模式
+  # 删减了input illegal，因为jw04PDF没要求。自动化的测试数据要取一个最小集，不然没有实现的人会运行出错。
+  - SUDO
+  -
+    - np -t Wang 11010119900307109X 1
+    - TID illegal.
+  -
+    - np -t Wang# 11010119900307109a 012
+    - ID illegal.
+  -
+    - np -t Wang 11010119900307109a 012
+    - ID illegal. 
+  -
+    - np -t Wang$ 11010119900307109X 012
+    - Name illegal.
+  -
+    - np -t Wang 11010119900307109X 012
+    - TID illegal.
+  -
+    - np -t Wang 11010119900307109X 10000
+    - Add teacher success.
+  -
+    - np -t Liu 11010119900307109X 10001
+    - ID exists.
+  -
+    - np -t Liu 110101199003072877 10000
+    - TID exists.
+  -
+    - np -t Liu 110101199003072877 10001
+    - Add teacher success.
+  -
+    - np -s Yu 110101199003078930 10000000
+    - ID illegal.
+  - 
+    - np -s Yu% 110101199003078937 10000000
+    - Name illegal.
+  -
+    - np -s Yu 110101199003078937 100000001
+    - SID illegal.
+  -
+    - np -s Yu 110101199003078937 10000000
+    - Add student success.
+  -
+    - np -s KP 110101199003078937 10000001
+    - ID exists.
+  -
+    - np -s KP 11010119900307109X 10000001
+    - ID exists.
+  -
+    - np -s KP 110101199003076835 10000001
+    - Add student success.
+  - back
+  - QUIT
