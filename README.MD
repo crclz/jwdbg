@@ -37,3 +37,39 @@
 
 ## Bug与建议
 欢迎提交bug和建议到issue区。bug请尽量附带详细信息。
+
+
+## 贡献测试数据
+可以用issue的方式贡献数据，也可以用fork+PullRequest的方式。
+
+测试数据以yaml书写。yaml和json的区别是：yaml对人类读写友好。
+
+测试数据的结构，用json来表示，则是：
+```json
+{
+    name: "my test data",
+    data: [
+        "SUDO",// 单行输入，无输出
+        ["input1","output1"],// 单行输入，单行输出
+        ["input2","output2\naaaaaaaa"],// 单行输入，多行输出
+    ]
+}
+```
+用yaml来表示，则是：
+```yaml
+name: my test data
+
+data:
+  - SUDO # 单行输入，无输出
+  -
+    - input1 # 单行输入，单行输出
+    - output1
+  - 
+    - input2 # 单行输入，多行输出
+    - |
+      output2
+      aaaaaaaa
+    # 这是yaml对多行字符串的友好支持
+```
+
+具体可以参考`case1.yml`的内容。
