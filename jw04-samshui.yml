@@ -1,4 +1,4 @@
-name: jw04 data from @samshui
+name: jw04 data from @samshui https://bhpan.buaa.edu.cn/#/link/F7CC6C9FA4517485B7C6BA0A3C85A06B
 
 data:
   # SUDO 模式
@@ -107,5 +107,5 @@ data:
   - back
   
   # login part end
-  
+
   - QUIT
