@@ -1,9 +1,22 @@
 import os
+import sys
 import yaml
 import subprocess
 import io
+import argparse
 
-case_file = './case1.yml'
+if sys.version_info[0] < 3 or sys.version_info[1] < 7:
+    print('Require python 3.7+')
+    exit(-1)
+
+parser = argparse.ArgumentParser(description="jwdbg arguments")
+parser.add_argument('-cmd', required=True,
+                    help="command to run the target program")
+parser.add_argument('-case', required=True,
+                    help="testcase file, e.g. case1.yml")
+args = parser.parse_args()
+
+case_file = args.case
 
 with open(case_file, 'r', encoding="utf-8") as f:
     testcase = yaml.load(f, Loader=yaml.SafeLoader)
@@ -46,8 +59,7 @@ for item in testcase['data']:
 
 # run program and get output
 
-os.chdir("E:/personal/学习/大二下/面向对象/jw_idea/target/classes")
-cmd = "java Test"
+cmd = args.cmd
 input_data = "\n".join(input_lines).encode("utf-8")
 output_data = subprocess.Popen(cmd, stdout=subprocess.PIPE,
                                stdin=subprocess.PIPE).communicate(input_data)[0]
@@ -64,8 +76,8 @@ while i < smaller_len:
         ok = False
         print("test failure")
         print("================")
-        print(f"expected:\t{output_lines[i]}")
-        print(f"actual:\t\t{actual_lines[i]}")
+        print(f"expected: {output_lines[i]}")
+        print(f"actual:   {actual_lines[i]}")
         print("================")
         break
     i += 1
