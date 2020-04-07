@@ -1,16 +1,17 @@
 data:
   - SUDO # enter admin mode
   -
-    - np -t a1 123213 123
-    - ID illegal. # 现在所有信息都非法，但是首先应当判断id。以下同理。
-  -
+    - np -t a1 123213 123 # 现在所有信息都非法，但是首先应当判断id。以下同理。
+    - ID illegal. 
+  - # 你看到的 ================== 标记，是测试数据编写者的 “书签”
     - np -t lst 53010219200508011x 55864 # 新建教师记录 （合法，便于测试下一条的身份证重复）===============
     - Add teacher success.
   -
     - np -t lst 53010219200508011x 558640 # id已存在
     - ID exists.
   -
-    - np -t lst1 110101199003076050 558640 # "lst1" 包含了数字；身份证用这个生成的 http://sfz.uzuzuz.com/
+    # 身份证用这个生成的 http://sfz.uzuzuz.com/
+    - np -t lst1 110101199003076050 558640 # "lst1" 包含了数字
     - Name illegal.
   -
     - np -t lst 110101199003076050 558640 # 
@@ -41,6 +42,106 @@ data:
   -
     - np -s aa 110101199003073490 18371234 # 学号已存在
     - SID exists.
+  - back # 退出SUDO，返回上一级
 
+  # 接下来测试登录以及登录后的功能
+
+  # 教师登录
+  -
+    - login -t id55555id a12345 # 不存在的身份证号码
+    - Login Error. Your ID or password maybe wrong.
+  -
+    - login -t 53010219200508011x fake_password # 错误的密码
+    - Login Error. Your ID or password maybe wrong.
+  -
+    - login -t 110101199003074311 a12345 # 身份证号码是学生的
+    - Login Error. Your ID or password maybe wrong.
+  -
+    - login -t 53010219200508011x a12345 # 成功登录，进入登陆后模式
+    - Login success.
+  
+  # 教师登陆后模式
+  - 
+    - myinfo # 显示个人信息
+    - |
+      Name:lst
+      IDNum:53010219200508011X
+      TID:55864
+      Sex:M
+      Birthday:1920/05/08
+  # 修改密码
+  -
+    - chgpw aaaaaaaa b # 密码不符合标准（至少两类符号）
+    - Password illegal.
+  -
+    - chgpw aaaaaaa1 aaaaaaa # 两个密码不一致
+    - The password you entered must be the same as the former one.
+  - 
+    - chgpw Aaaaaaa1 Aaaaaaa1 # 成功修改密码
+    - Password changed successfully.
+  # 退出去，重新登录测试一下
+  - back 
+  -
+    - login -t 53010219200508011x Aaaaaaa1
+    - Login success.
+  - 
+    - myinfo # 显示个人信息
+    - |
+      Name:lst
+      IDNum:53010219200508011X
+      TID:55864
+      Sex:M
+      Birthday:1920/05/08
+
+  # 教师退出登录
+  - back
+
+  # 学生登陆
+  -
+    - login -s asdasd1 a12345 # 不存在的身份证号码
+    - Login Error. Your ID or password maybe wrong.
+  -
+    - login -s 110101199003074311 a12345666 # 密码错误
+    - Login Error. Your ID or password maybe wrong.
+  -
+    - login -s 53010219200508011x Aaaaaaa1 # 身份证不是学生的 （这个账号密码是之前的教师的）
+    - Login Error. Your ID or password maybe wrong.
+  -
+    - login -s 110101199003074311 a12345
+    - Login success.
+  
+  # 现在进入了学生登陆后的模式
+  -
+    - myinfo
+    - |
+      Name:lst
+      IDNum:110101199003074311
+      SID:18371234
+      Sex:M
+      Birthday:1990/03/07
+  
+  # 修改密码
+  -
+    - chgpw aaaaaaaa b # 密码不符合标准（至少两类符号）
+    - Password illegal.
+  -
+    - chgpw aaaaaaa1 aaaaaaa # 两个密码不一致
+    - The password you entered must be the same as the former one.
+  - 
+    - chgpw Baaaaaa1 Baaaaaa1 # 成功修改密码
+    - Password changed successfully.
+  # 退出去，重新登录测试一下
+  - back 
+  -
+    - login -s 110101199003074311 Baaaaaa1
+    - Login success.    
+  -
+    - myinfo
+    - |
+      Name:lst
+      IDNum:110101199003074311
+      SID:18371234
+      Sex:M
+      Birthday:1990/03/07
 
   - QUIT # quit
