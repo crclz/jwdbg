@@ -46,6 +46,9 @@ data:
     - np -s aa1 110101199003073490 123 # 姓名非法
     - Name illegal.
   -
+    - np -s aa_a 110101199003073490 123 # 姓名非法
+    - Name illegal.
+  -
     - np -s aa 110101199003073490 1837123 # 学号非法
     - SID illegal.
   -
@@ -83,7 +86,13 @@ data:
     - chgpw aaaaaaaa b # 密码不符合标准（至少两类符号）
     - Password illegal.
   -
+    - chgpw ---------- b # 密码不符合标准（至少两类符号）
+    - Password illegal.
+  -
     - chgpw aaaaaaa1 aaaaaaa # 两个密码不一致
+    - The password you entered must be the same as the former one.
+  -
+    - chgpw aaaaaaa1 Aaaaaaa1 # 两个密码不一致
     - The password you entered must be the same as the former one.
   - 
     - chgpw Aaaaaaa1 Aaaaaaa1 # 成功修改密码
