@@ -1,0 +1,132 @@
+name: crclz's jw04 input illegal test
+
+warn: |
+      本测试中的部分行为可能不符合你的程序，因为jw04pdf描述不清。
+      本测试数据可能过于严格。
+      如果你认为本测试数据不满意，你可以修改测试数据。
+      助教透露的测试数据里面已知的会inputillegal的情况：login缺少参数。
+
+# [missing]：少参数。
+# [unexpected]：不缺参数，但是参数是意料之外的。例如当只有'-s', '-t'之类的参数合法时，输入'-o'。
+
+data:
+
+# 1级命令行 arg[0] [missing]
+- 
+  - ""
+  - Input illegal.
+
+# 1级命令行 arg[0] [unexpected]
+-
+  - suDo
+  - Input illegal.
+-
+  - aaaaaaa
+  - Input illegal.
+-
+  - bb asdbasdasd asdasdad a a a
+  - Input illegal.
+
+# login [missing]
+-
+  - login
+  - Input illegal.
+- 
+  - login -s
+  - Input illegal.
+-
+  - login -t
+  - Input illegal.
+-
+  - login -t 5123
+  - Input illegal.
+-
+  - login -s 121132
+  - Input illegal.
+
+# login [unexpected]
+-
+  - login -z
+  - Input illegal.
+-
+  - login -z 511111
+  - Input illegal.
+- 
+  - login -z 5125 123131312
+  - Input illegal.
+
+
+# SUDO模式下
+
+- SUDO
+
+# arg[0] [missing]
+-
+  - ""
+  - Input illegal.
+
+# arg[0] [unexpected]
+-
+  - qUiT
+  - Input illegal.
+-
+  - exit
+  - Input illegal.
+-
+  - asdsad
+  - Input illegal.
+
+# np [missing]
+-
+  - np
+  - Input illegal.
+-
+  - np -t
+  - Input illegal.
+-
+  - np -t aaa
+  - Input illegal.
+-
+  - np -t aaa 5111111
+  - Input illegal.
+
+# np [unexpected]
+-
+  - np -d
+  - Input illegal.
+-
+  - np -d name 5111111111111 18370000
+  - Input illegal.
+
+- back
+
+
+
+# 登陆模式下
+
+# 先添加一个合法用户
+- SUDO
+-
+  - np -t lst 53010219200508011x 55864
+  - Add teacher success.
+- back
+
+# arg[0] [missing]
+-
+  - ""
+  - Input illegal.
+
+# arg[0] [unexpected]
+-
+  - zzzzz
+  - Input illegal.
+
+# chgpw [missing]
+-
+  - chgpw
+  - Input illegal.
+-
+  - chgpw passwd0
+  - Input illegal.
+
+- QUIT
