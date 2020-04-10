@@ -23,6 +23,11 @@ with open(case_file, 'r', encoding="utf-8") as f:
 
 print(f"test name: {testcase['name']}")
 
+if testcase.__contains__('warn'):
+    print("**** warn **************")
+    print(testcase['warn'])
+    print("************************")
+
 # get input and output lines from test data
 # make sure each item of these 2 lists does not end with \n, \r\n (by calling strip())
 input_lines = []
@@ -49,7 +54,7 @@ for item in testcase['data']:
         raise Exception(f"Test data wrong format. {str(item)}")
 
     input_lines.append(current_input_line)
-
+    
     if current_output != None:
         for line in current_output.splitlines(keepends=False):
             line = line.strip()
@@ -62,7 +67,7 @@ for item in testcase['data']:
 cmd = args.cmd
 input_data = "\n".join(input_lines).encode("utf-8")
 output_data = subprocess.Popen(cmd, stdout=subprocess.PIPE,
-                               stdin=subprocess.PIPE).communicate(input_data)[0]
+                               stdin=subprocess.PIPE).communicate(input_data, timeout=5)[0]
 actual_lines = output_data.decode().splitlines(keepends=False)
 
 # compare actual output lines and expected lines
