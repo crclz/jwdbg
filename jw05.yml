@@ -123,6 +123,7 @@ data:
 -
   - udc bh00000000 -n oop6
   - Update success.
+# TODO: 没有SUDO没有gc权限
 - 
   - gc -id bh00000000 # 查询看看修改结果
   - CID:bh00000000,Name:oop6,Teachers:[10086,A],Capacity:0/0 # TODO: 这里的bh的大小写？
@@ -134,6 +135,7 @@ data:
   - CID:bh00000000,Name:oop6324,Teachers:[10086,A],Capacity:0/0 # TODO: 这里的bh的大小写？
 
 # 修改课程容量。检测完后改回去。
+# TODO：登录
 -
   - udc bh00000222 -c 66 # 这里隐含了判断顺序
   - Course does not exist.
