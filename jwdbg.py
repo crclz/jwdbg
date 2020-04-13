@@ -54,7 +54,7 @@ for item in testcase['data']:
         raise Exception(f"Test data wrong format. {str(item)}")
 
     input_lines.append(current_input_line)
-    
+
     if current_output != None:
         for line in current_output.splitlines(keepends=False):
             line = line.strip()
@@ -66,7 +66,7 @@ for item in testcase['data']:
 
 cmd = args.cmd
 input_data = "\n".join(input_lines).encode("utf-8")
-output_data = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+output_data = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,
                                stdin=subprocess.PIPE).communicate(input_data, timeout=5)[0]
 actual_lines = output_data.decode().splitlines(keepends=False)
 
