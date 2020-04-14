@@ -2,29 +2,30 @@
 
 1821教务系列命令行评测（民间）
 
-**自动化测试；任何人都可以贡献测试数据！** [说明](#贡献测试数据)
+**自动化测试；任何人都可以贡献测试数据！** [指南](#贡献测试数据)
 
 **软件在活跃开发中，欢迎试用并提交bug和建议！**
 
 ## 附带数据
-- jw4数据（from crclz）`case1.yml`
+- [jw05数据详情](./jw05-readme.md)
+- jw4数据（from crclz）`jw04.yml`
 - jw4数据（from于浩淼）`jw04-samshui.yml`
 
 ## 功能特点
 - 能够测试程序能否输出指定内容
 - 如果不能输出指定内容，会给出**期望输出与实际输出的比较**，并提供**直到出错命令**的输入数据进行检验，**可以方便用于调试**。如果用传统方式（in.txt，out.txt，对比程序输出和out.txt），无法实现精确定位到某条指令。[说明](#阅读测试结果)
-- 以yaml的方式书写测试数据，可读性高，易于扩展。[查看示例](./case1.yml)
+- 以yaml的方式书写测试数据，可读性高，易于扩展。[查看示例](./jw04.yml)
 
 ## 前提条件
 - python`3.7+`
 - 需要pyyaml模块 `pip install pyyaml`
 
 ## 傻瓜式运行测试（以jw4为例）
-1. 拷贝`jwdbg.py`和`case1.yml`(或者jw04-samshui.yml)到java输出目录（一堆.class那个目录下）
-2. 命令行进入那个目录，运行`python .\jwdbg.py -cmd "java Test" -case case1.yml`
+1. 拷贝`jwdbg.py`和`jw04.yml`(或者jw04-samshui.yml)到java输出目录（一堆.class那个目录下）
+2. 命令行进入那个目录，运行`python .\jwdbg.py -cmd "java Test" -case jw04.yml`
 
 ## 运行测试
-`python .\jwdbg.py -cmd "java Test" -case case1.yml`
+`python .\jwdbg.py -cmd "java Test" -case jw04.yml`
 
 `-case`：测试用例文件
 
@@ -76,7 +77,7 @@ data:
     # 这是yaml对多行字符串的友好支持
 ```
 
-具体可以参考`case1.yml`的内容。
+具体可以参考`jw04.yml`的内容。
 
 附上yaml一般用法（部分）：
 ```yaml
