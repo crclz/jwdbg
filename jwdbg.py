@@ -14,6 +14,8 @@ parser.add_argument('-cmd', required=True,
                     help="command to run the target program")
 parser.add_argument('-case', required=True,
                     help="testcase file, e.g. case1.yml")
+parser.add_argument('-inputdata', action='store_true')
+
 args = parser.parse_args()
 
 case_file = args.case
@@ -61,6 +63,13 @@ for item in testcase['data']:
             output_lines.append(line)
             belong_to[len(output_lines)-1] = len(input_lines)-1
 
+# all input
+if args.inputdata:
+    print("All input data:")
+    print("============================")
+    print('\n'.join(input_lines))
+    print("============================")
+    exit(0)
 
 # run program and get output
 
