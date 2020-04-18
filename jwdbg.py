@@ -106,7 +106,6 @@ if not ok:
         i += 1
     exit(2)
 
-
 if len(actual_lines) != len(output_lines):
     print("test failed")
     print("last command output line count mismatch")
@@ -123,6 +122,14 @@ if len(actual_lines) != len(output_lines):
         for l in output_lines[smaller_len:]:
             print(l)
         print("================")
+    
+    # print all input lines
+    print()
+    print('Please copy these lines for debugging:')
+    for line in input_lines:
+        print(line)
+
+
     exit(3)
 
 print("test passed")
