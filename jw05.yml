@@ -24,28 +24,31 @@ data:
 -
   - nc bh12345678 oop_6324 [10086,10001] 1
   - Course add illegal.
-# 教师列表格式错误
--
-  - nc bh12345678 oop6324 [ 1
-  - Input illegal.
--
-  - nc bh12345678 oop6324 ] 1
-  - Input illegal.
--
-  - nc bh12345678 oop6324 []] 1
-  - Input illegal.
--
-  - nc bh12345678 oop6324 [[,]] 1
-  - Input illegal.
--
-  - nc bh12345678 oop6324 [,] 1
-  - Input illegal.
--
-  - nc bh12345678 oop6324 [10086,,10001] 1
-  - Input illegal.
--
-  - nc bh12345678 oop6324 [10086,10001,] 1
-  - Input illegal.
+
+# 教师列表格式错误。在助教的评测中，不会出现这种情况。
+# -
+#   - nc bh12345678 oop6324 [ 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 ] 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 []] 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 [[,]] 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 [,] 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 [10086,,10001] 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 [10086,10001,] 1
+#   - Input illegal.
+
+
 # 教师列表教师号非法
 - 
   - nc bh12345678 oop6324 [10086,100012] 1
