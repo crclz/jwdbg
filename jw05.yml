@@ -323,8 +323,6 @@ data:
 - back
 
 
-# TODO: gc -all test
-
 
 
 # 测试教师登陆后的功能
@@ -467,6 +465,39 @@ data:
     1.18370000,studa
     2.18370001,studb
     3.18370002,studc
+    n-next page, l-last page, q-quit
+- q
+
+# 测试不同大写情况的BH的课程的排序
+
+# 这三个在计划之外，但是只会影响后面的一点测试。
+- nc Bh00000066 oop6667 [] 100 # 2 （单单在这三个里面的排序）======
+- nc bh00000060 oop6666 [] 100 # 3  ==========================
+- nc BH00000055 oop6668 [] 100 # 1  ==========================
+
+- back
+
+-
+  - login -t 110101199003078670 a12345
+  - Login success.
+
+
+# test gc -all & 大小写排序
+
+-
+  - gc -all 1 1000 # 注意，大写字母的ascii较小，字典序在前。
+  - |
+    Page:1
+    1.CID:BH00000055,Name:oop6668,Teachers:[],Capacity:0/100
+    2.CID:Bh00000066,Name:oop6667,Teachers:[],Capacity:0/100
+    3.CID:bh00000000,Name:oop6324,Teachers:[10086,A],Capacity:0/0
+    4.CID:bh00000001,Name:oop6325,Teachers:[A],Capacity:0/1
+    5.CID:bh00000002,Name:oop6326,Teachers:[A,B,10086],Capacity:3/100
+    6.CID:bh00000003,Name:oop6327,Teachers:[A,B,C],Capacity:1/100
+    7.CID:bh00000004,Name:oop6328,Teachers:[A,B],Capacity:0/100
+    8.CID:bh00000005,Name:oop6329,Teachers:[A,B],Capacity:0/100
+    9.CID:bh00000006,Name:oop6330,Teachers:[A,B],Capacity:1/100
+    10.CID:bh00000060,Name:oop6666,Teachers:[],Capacity:0/100
     n-next page, l-last page, q-quit
 - q
 
