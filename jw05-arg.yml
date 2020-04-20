@@ -147,6 +147,9 @@ data:
 -
   - udc BH02 -qq 5
   - Input illegal.
+-
+  - udc BH22 -c Integer # 这里是测试jw5 pdf最后的“如果本来该输⼊数字的地⽅输⼊了字⺟...”
+  - Input illegal.      # 并且这个的优先级比课程存在性的优先级高
 
 # clist
 -
