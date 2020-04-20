@@ -1,0 +1,239 @@
+name: crclz's jw05 ARGUMENT test
+
+data:
+
+# 先插入数据
+
+- SUDO
+
+# nc 注意，成功的话不需要输出任何东西。
+- nc bh00000000 oop6324 [10086,10001] 0 # 合法 =================================== course 0
+- nc bh00000004 oop6328 [10001,10002] 100 # 合法 ================================ course 4
+- nc bh00000002 oop6326 [10001,10002,10086] 100 # 合法  ================================== course 2
+- nc bh00000001 oop6325 [10001] 1 # 合法 ===================================== course 1
+- nc bh00000006 oop6330 [10001,10002] 100 # 合法 ================================ course 6
+- nc bh00000005 oop6329 [10001,10002] 100 # 合法 ================================ course 5
+- nc bh00000003 oop6327 [10001,10002,10003] 100 # 合法 ================================ course 3
+
+# 按计划添加教师信息
+-
+  - np -t A 110101199003078670 10001 # =========================================== teacher A 10001
+  - Add teacher success.
+-
+  - np -t B 110101199003075234 10002 # =========================================== teacher B 10002
+  - Add teacher success.
+-
+  - np -t C 110101199003075736 10003 # =========================================== teacher C 10003
+  - Add teacher success.
+
+# 按计划添加学生信息
+-
+  - np -s studa 110101201103079910 18370000 # ==================================== student studa 18370000
+  - Add student success.
+-
+  - np -s studb 110101201103071134 18370001 # ==================================== student studb 18370001
+  - Add student success.
+-
+  - np -s studc 110101201103072057 18370002 # ==================================== student studc 18370002
+  - Add student success.
+-
+  - np -s studd 110101201103077958 18370003 # ==================================== student studd 18370003
+  - Add student success.
+-
+  - np -s stude 110101201103078053 18370004 # ==================================== student stude 18370004
+  - Add student success.
+-
+  - np -s studf 110101201103075178 18370005 # ==================================== student studf 18370005
+  - Add student success.
+-
+  - np -s studg 110101201103070553 18370006 # ==================================== student studg 18370006
+  - Add student success.  
+
+- back
+
+# -==-=-=-=-=-=-=-=-=-=-=--==-=----=-==--=-=-=-===-=-=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-==-=-
+# -==-=-=-=-=-=-=-=-=-=-=--==-=----=-==--=-=-=-===-=-=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-==-=-
+# -==-=-=-=-=-=-=-=-=-=-=--==-=----=-==--=-=-=-===-=-=-=-=-=-=-=-=-=-=-=-=-=--=--=-=-==-=-
+
+
+
+# 少参数、缺参数测试
+
+# 1级命令行
+-
+  - ""
+  - Input illegal.
+-
+  - sudo
+  - Input illegal.
+-
+  - sUDO
+  - Input illegal.
+
+# login 少参数
+-
+  - login
+  - Input illegal.
+-
+  - login -s
+  - Input illegal.
+-
+  - login -t 110101aaaaaaaaaaaa # 少参数比身份证不存在优先
+  - Input illegal.
+
+# login 错参数
+-
+  - login -net 110101aaaaasdasda aasd23456
+  - Input illegal.
+
+
+# SUDO状态下
+- SUDO
+
+- 
+  - ""
+  - Input illegal.
+-
+  - csgo
+  - Input illegal.
+
+# np少参数
+-
+  - np
+  - Input illegal.
+-
+  - np -t
+  - Input illegal.
+-
+  - np -s
+  - Input illegal.
+-
+  - np -t soldier-76
+  - Input illegal.
+-
+  - np -t soldier-76 110101aaaaaa
+  - Input illegal.
+
+# np 错参数
+-
+  - np -o soldier-76 510122int 183700000001
+  - Input illegal.
+
+
+# nc
+-
+  - nc
+  - Input illegal.
+-
+  - nc BH111
+  - Input illegal.
+-
+  - nc BH111 oo-p [
+  - Input illegal.
+-
+  - nc BH111 oo-p [A-1]
+  - Input illegal.
+
+# udc
+-
+  - udc
+  - Input illegal.
+-
+  - udc BH01
+  - Input illegal.
+-
+  - udc BH01 -n
+  - Input illegal.
+-
+  - udc BH02 -qq 5
+  - Input illegal.
+
+# clist
+-
+  - clist
+  - Input illegal.
+-
+  - clist BH99
+  - Input illegal.
+-
+  - clist BH100 5
+  - Input illegal.
+
+- back
+
+
+# 登陆后状态下
+- 
+  - login -t 110101199003078670 a12345
+  - Login success.
+-
+  - ""
+  - Input illegal.
+-
+  - gc
+  - Input illegal.
+-
+  - gc -id
+  - Input illegal.
+-
+  - gc -key
+  - Input illegal.
+-
+  - gc -key oop
+  - Input illegal.
+-
+  - gc -key oop x y # 这里是测试jw5 pdf最后的“如果本来该输⼊数字的地⽅输⼊了字⺟...”
+  - Input illegal.
+-
+  - gc -key oop 2 x
+  - Input illegal.
+-
+  - gc -key oop 2
+  - Input illegal.
+-
+  - gc -wrong 5 5 5 5 5 5
+  - Input illegal.
+
+# myc
+-
+  - myc
+  - Input illegal.
+-
+  - myc 7
+  - Input illegal.
+
+# clist
+-
+  - clist
+  - Input illegal.
+-
+  - clist BH88
+  - Input illegal.
+-
+  - clist BH87 6
+  - Input illegal.
+
+
+- back # 教师退出登录
+
+
+# 学生登录
+-
+  - login -s 110101201103079910 a12345
+  - Login success.
+-
+  - getc
+  - Input illegal.
+-
+  - dropc
+  - Input illegal.
+-
+  - myc
+  - Input illegal.
+-
+  - myc 80
+  - Input illegal.
+
+- back
+
+- QUIT
