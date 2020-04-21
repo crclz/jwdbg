@@ -92,7 +92,8 @@ actual_lines = output_data.decode().splitlines(keepends=False)
 echo_lines = [x for x in actual_lines if x.startswith("[Echo]")]
 
 if len(echo_lines) != len(input_lines):
-    print("echo lines integration check failure")
+    print(f"{Fore.RED}Echo lines ([Echo]) integration check failure.")
+    print(f"Please view ndbg.py document.{RESET_ALL}")
     print()
     exit(-10)
 
