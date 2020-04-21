@@ -340,7 +340,7 @@ data:
     4.CID:bh00000003,Name:oop6327,Teachers:[A,B,C],Capacity:0/100
     5.CID:bh00000004,Name:oop6328,Teachers:[A,B],Capacity:0/100
     6.CID:bh00000005,Name:oop6329,Teachers:[A,B],Capacity:0/100
-    7.CID:bh0000o006,Name:oop6330,Teachers:[A,B],Capacity:0/100
+    7.CID:bh00000006,Name:oop6330,Teachers:[A,B],Capacity:0/100
     n-next page, l-last page, q-quit
 - q
 - back
