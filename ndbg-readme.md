@@ -24,7 +24,48 @@ ndbg要求待测目标程序在读取输入行的时候，输出`[Echo]+这个�
 "debugging".equals(System.getenv("JWDBG"))
 ```
 
+## 示例代码
+
+MyInputer.java
+
+```java
+import java.util.Scanner;
+
+public class MyInputer {
+    private Scanner scanner;
+    private boolean isDebug;
+
+    public MyInputer() {
+        scanner = new Scanner(System.in);
+
+        // 只有当环境变量JWDBG=debugging时，isDebug=true
+        isDebug = "debugging".equals(System.getenv("JWDBG"));
+    }
+
+    public String nextLine() {
+        String line = scanner.nextLine();
+        if (isDebug) {
+            System.out.println("[Echo]" + line);
+        }
+        return line;
+    }
+}
+```
+
+
+然后，全局使用一个`MyInputer`（或者采用单例模式），在所有原来用scanner的地方，替换成：
+```java
+// before
+String x = scanner.nextLine();
+
+// after
+String x = myInputer.nextLine();
+```
+
 所以，修改你的java程序，让只有当这个表达式为`true`时，才输出`[Echo]...`。
+
+## 常见错误
+- Echo lines integration check failure: 你的程序并未按照要求输出`[Echo]...`。请搜索以下你的源文件，确保没有对scanner.nextLine的直接调用（除了包装类中）。
 
 ## 二次检查
 最后，别忘了使用`jwdbg.py`来进行测试，以防程序有额外的行为。
