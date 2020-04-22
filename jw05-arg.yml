@@ -148,19 +148,32 @@ data:
   - udc BH02 -qq 5
   - Input illegal.
 -
-  - udc BH22 -c Integer # 这里是测试jw5 pdf最后的“如果本来该输⼊数字的地⽅输⼊了字⺟...”
-  - Input illegal.      # 并且这个的优先级比课程存在性的优先级高
+  - udc BH22 -c Integer # 课程存在性的优先级较高
+  - Course does not exist.      
+-
+  - udc BH00000004 -c Integer
+  - Input illegal.
 
 # clist
+
+# TODO: clist缺参数的测试尚不明确，只有int解析错误的测试
+
+# -
+  # - clist
+  # - Input illegal.
+
+# -
+#   - clist BH99
+#   - Course does not exist. # 根据jw5 PDF，clist是特例。
+# -
+#   - clist BH100 5
+#   - Course does not exist.
 -
-  - clist
-  - Input illegal.
+  - clist BH7 Int Int
+  - Course does not exist.
 -
-  - clist BH99
-  - Input illegal.
--
-  - clist BH100 5
-  - Input illegal.
+  - clist BH750 1 10
+  - Course does not exist.
 
 - back
 
@@ -203,17 +216,6 @@ data:
   - Input illegal.
 -
   - myc 7
-  - Input illegal.
-
-# clist
--
-  - clist
-  - Input illegal.
--
-  - clist BH88
-  - Input illegal.
--
-  - clist BH87 6
   - Input illegal.
 
 

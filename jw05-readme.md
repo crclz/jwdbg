@@ -64,10 +64,13 @@ http://forum.loheagn.com/d/89/19
 （上面摘自 http://forum.loheagn.com/d/89/14）
 
 
+> ... (clist部分)  
 > 如果课程不存在或者课程号⾮法，则输出"Course does not exist."，优先级⾼于Input illegal
 
 （上面摘自jw05pdf，clist部分）
 
 总结：
 
-**少参数、错参数 > 存在性 > clist命令的int解析错误**
+**少参数、错参数 > 存在性 > Int解析错误**
+
+**不明确：clist命令中，存在性 和 缺少参数 的优先级**
