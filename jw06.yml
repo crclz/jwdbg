@@ -1,0 +1,504 @@
+name: crclz's jw05 commandline test data
+
+warn: Data for jw04 is also fit for jw05. Test your program with jw04 data first.
+
+data:
+
+
+# 1. SUDO模式测试
+- SUDO
+
+# nc测试：nc cid(满足..正则) cname(英文数字) teachers(教师号(5位)列表，需要满足号码合法+列表解析无误) capacity(>=0)
+
+# 课程号非法
+-
+  - nc hh12345678 oop6324 [10086,10001] 1
+  - Course add illegal.
+-
+  - nc bh1234567 oop6324 [10086,10001] 1
+  - Course add illegal.
+-
+  - nc bhP2345678 oop6324 [10086,10001] 1
+  - Course add illegal.
+# 课程名非法
+-
+  - nc bh12345678 oop_6324 [10086,10001] 1
+  - Course add illegal.
+
+# 教师列表格式错误。在助教的评测中，不会出现这种情况。
+# -
+#   - nc bh12345678 oop6324 [ 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 ] 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 []] 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 [[,]] 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 [,] 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 [10086,,10001] 1
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 [10086,10001,] 1
+#   - Input illegal.
+
+
+# 教师列表教师号非法
+- 
+  - nc bh12345678 oop6324 [10086,100012] 1
+  - Course add illegal.
+-
+  - nc bh12345678 oop6324 [10086,1000q] 1
+  - Course add illegal.
+-
+  - nc bh12345678 oop6324 [10001,10002,10001] 1 # 有两个10001
+  - Course add illegal.
+# 课程容量非法
+-
+  - nc bh12345678 oop6324 [10086,10001] -1
+  - Course add illegal.
+
+# 合法数据插入计划：
+# 课程：bh00000000 ~ bh0000006 共7门课
+# 教师：10001 10002 10003（均有对应教师）；10086（不插入教师记录）
+# 学生：18370000 18370001 18370002 18370003 18370004 18370005 18370006 共7名学生
+
+# nc 注意，成功的话不需要输出任何东西。
+- nc bh00000000 oop6324 [10086,10001] 0 # 合法 =================================== course 0
+- nc bh00000004 oop6328 [10001,10002] 100 # 合法 ================================ course 4
+- nc bh00000002 oop6326 [10001,10002,10086] 100 # 合法  ================================== course 2
+- nc bh00000001 oop6325 [10001] 1 # 合法 ===================================== course 1
+- nc bh00000006 oop6330 [10001,10002] 100 # 合法 ================================ course 6
+- nc bh00000005 oop6329 [10001,10002] 100 # 合法 ================================ course 5
+- nc bh00000003 oop6327 [10001,10002,10003] 100 # 合法 ================================ course 3
+
+# 按计划添加教师信息
+-
+  - np -t A 110101199003078670 10001 # =========================================== teacher A 10001
+  - Add teacher success.
+-
+  - np -t B 110101199003075234 10002 # =========================================== teacher B 10002
+  - Add teacher success.
+-
+  - np -t C 110101199003075736 10003 # =========================================== teacher C 10003
+  - Add teacher success.
+
+# 按计划添加学生信息
+-
+  - np -s studa 110101201103079910 18370000 # ==================================== student studa 18370000
+  - Add student success.
+-
+  - np -s studb 110101201103071134 18370001 # ==================================== student studb 18370001
+  - Add student success.
+-
+  - np -s studc 110101201103072057 18370002 # ==================================== student studc 18370002
+  - Add student success.
+-
+  - np -s studd 110101201103077958 18370003 # ==================================== student studd 18370003
+  - Add student success.
+-
+  - np -s stude 110101201103078053 18370004 # ==================================== student stude 18370004
+  - Add student success.
+-
+  - np -s studf 110101201103075178 18370005 # ==================================== student studf 18370005
+  - Add student success.
+-
+  - np -s studg 110101201103070553 18370006 # ==================================== student studg 18370006
+  - Add student success.  
+
+
+# 判断顺序测试
+-
+  - nc bh00000000 oop_6324 [10086,10001,a00] -100 # fixed
+  - Course exists.
+# TODO: Enhance
+
+# 修改课程名称。为了参照方便（只需要看那一长串=====），修改课程后，检测完，还是会修改回去。
+-
+  - udc bh00000222 -n oop_6 # 这里隐含了判断顺序
+  - Course does not exist.
+-
+  - udc bh00000000 -n oop_6
+  - Update fail.
+-
+  - udc bh00000000 -n oop6
+  - Update success.
+
+# 检查修改结果。注意，SUDO没有gc权限，这个要求很搞人。
+- back
+-
+  - login -t 110101199003078670 a12345
+  - Login success.
+- 
+  - gc -id bh00000000 
+  - CID:bh00000000,Name:oop6,Teachers:[A,10086],Capacity:0/0
+- back
+- SUDO # 切回去
+
+-
+  - udc bh00000000 -n oop6324 # 改回去
+  - Update success.
+
+ # 检查
+- back
+-
+  - login -t 110101199003078670 a12345
+  - Login success.
+-
+  - gc -id bh00000000
+  - CID:bh00000000,Name:oop6324,Teachers:[A,10086],Capacity:0/0
+- back
+- SUDO
+
+# 修改课程容量。检测完后改回去。
+-
+  - udc bh00000222 -c 66 # 这里隐含了判断顺序
+  - Course does not exist.
+-
+  - udc bh00000000 -c abcdefg
+  - Input illegal. # 拥有仅次于存在性判断的优先级
+-
+  - udc bh00000000 -c -2000
+  - Update fail.
+-
+  - udc bh00000001 -c 10
+  - Update success.
+# 查询看看修改结果
+- back
+-
+  - login -t 110101199003078670 a12345
+  - Login success.
+-
+  - gc -id bh00000001 
+  - CID:bh00000001,Name:oop6325,Teachers:[A],Capacity:0/10
+- back
+- SUDO
+
+-
+  - udc bh00000001 -c 1  # 改回去
+  - Update success.
+# 查询看看修改结果
+- back
+-
+  - login -t 110101199003078670 a12345
+  - Login success.
+-
+  - gc -id bh00000001
+  - CID:bh00000001,Name:oop6325,Teachers:[A],Capacity:0/1
+- back
+- SUDO
+
+# 修改教师列表，检测完后改回去。
+-
+  - udc bh00000222 -t [10001] # 这里隐含了判断顺序
+  - Course does not exist.
+-
+  - udc bh00000000 -t [,10001] # TODO 列表解析错误应该输出什么？input-illegal or update-fail
+  - Input illegal.
+-
+  - udc bh00000000 -t [10001,1000] # 教师号非法
+  - Update fail.
+-
+  - udc bh00000002 -t [10001]
+  - Update success.
+
+- back
+-
+  - login -t 110101199003078670 a12345
+  - Login success.
+-
+  - gc -id bh00000002 # 检查修改结果
+  - CID:bh00000002,Name:oop6326,Teachers:[A],Capacity:0/100 # TODO: 大小写
+- back
+- SUDO
+-
+  - udc bh00000002 -t [10001,10002,10086] # 改回去
+  - Update success.
+
+- back
+-
+  - login -t 110101199003078670 a12345
+  - Login success.
+-
+  - gc -id bh00000002 # 检查修改结果
+  - CID:bh00000002,Name:oop6326,Teachers:[A,B,10086],Capacity:0/100 # TODO: 大小写
+- back
+
+
+# TODO: 查询某教师所教授的课程清单
+
+
+
+# 二级命令行通用功能
+
+- # 以教师身份登录
+  - login -t 110101199003078670 a12345
+  - Login success.
+
+# gc -id
+-
+  - gc -id bh11111111
+  - Course does not exist.
+-
+  - gc -id bh00000003
+  - CID:bh00000003,Name:oop6327,Teachers:[A,B,C],Capacity:0/100 # TODO: 大小写
+# TODO: test ... illegal
+
+
+# 分页的测试思路：只在一个地方测试分页的各种上一页、下一页功能。
+# 其余地方不测试（使用一个大的PageSize，让输出只有一页）
+
+# gc -key
+- 
+  - gc -key o 1 2
+  - |
+    Page:1
+    1.CID:bh00000000,Name:oop6324,Teachers:[A,10086],Capacity:0/0
+    2.CID:bh00000001,Name:oop6325,Teachers:[A],Capacity:0/1
+    n-next page, l-last page, q-quit
+- q # quit displaying
+
+-
+  - gc -key o 1 2
+  - |
+    Page:1
+    1.CID:bh00000000,Name:oop6324,Teachers:[A,10086],Capacity:0/0
+    2.CID:bh00000001,Name:oop6325,Teachers:[A],Capacity:0/1
+    n-next page, l-last page, q-quit
+-
+  - n
+  - |
+    Page:2
+    1.CID:bh00000002,Name:oop6326,Teachers:[A,B,10086],Capacity:0/100
+    2.CID:bh00000003,Name:oop6327,Teachers:[A,B,C],Capacity:0/100
+    n-next page, l-last page, q-quit
+-
+  - l
+  - |
+    Page:1
+    1.CID:bh00000000,Name:oop6324,Teachers:[A,10086],Capacity:0/0
+    2.CID:bh00000001,Name:oop6325,Teachers:[A],Capacity:0/1
+    n-next page, l-last page, q-quit
+- 
+  - l
+  - Course does not exist.
+
+-
+  - gc -key o 1 2
+  - |
+    Page:1
+    1.CID:bh00000000,Name:oop6324,Teachers:[A,10086],Capacity:0/0
+    2.CID:bh00000001,Name:oop6325,Teachers:[A],Capacity:0/1
+    n-next page, l-last page, q-quit
+-
+  - n
+  - |
+    Page:2
+    1.CID:bh00000002,Name:oop6326,Teachers:[A,B,10086],Capacity:0/100
+    2.CID:bh00000003,Name:oop6327,Teachers:[A,B,C],Capacity:0/100
+    n-next page, l-last page, q-quit
+-
+  - n
+  - |
+    Page:3
+    1.CID:bh00000004,Name:oop6328,Teachers:[A,B],Capacity:0/100
+    2.CID:bh00000005,Name:oop6329,Teachers:[A,B],Capacity:0/100
+    n-next page, l-last page, q-quit
+-
+  - n
+  - |
+    Page:4
+    1.CID:bh00000006,Name:oop6330,Teachers:[A,B],Capacity:0/100
+    n-next page, l-last page, q-quit
+-
+  - n
+  - Course does not exist.
+
+- back
+
+
+
+
+# 测试教师登陆后的功能
+
+-
+  - login -t 110101199003078670 a12345 # teacher 10001
+  - Login success.
+-
+  - myc 1 1000
+  - |
+    Page:1
+    1.CID:bh00000000,Name:oop6324,Teachers:[A,10086],Capacity:0/0
+    2.CID:bh00000001,Name:oop6325,Teachers:[A],Capacity:0/1
+    3.CID:bh00000002,Name:oop6326,Teachers:[A,B,10086],Capacity:0/100
+    4.CID:bh00000003,Name:oop6327,Teachers:[A,B,C],Capacity:0/100
+    5.CID:bh00000004,Name:oop6328,Teachers:[A,B],Capacity:0/100
+    6.CID:bh00000005,Name:oop6329,Teachers:[A,B],Capacity:0/100
+    7.CID:bh00000006,Name:oop6330,Teachers:[A,B],Capacity:0/100
+    n-next page, l-last page, q-quit
+- q
+- back
+
+
+
+
+# 测试学生登陆后的功能
+
+-
+  - login -s 110101201103079910 a12345
+  - Login success.
+
+# 选课，并多方位检查
+
+-
+  - getc bh12345678 # 课程号不存在
+  - Course does not exist.
+-
+  - getc bh00000000 # 已满
+  - The course is full.
+-
+  - getc bh00000001 # 成功选课
+  - Course chosen success.
+-
+  - getc bh00000001 # 注意此时，课程已满且已经选过，所以看判断顺序
+  - The course has been selected.
+# 全方位检查选课
+
+#  检查学生的选课列表
+-
+  - myc 1 1000
+  - |
+    Page:1
+    1.CID:bh00000001,Name:oop6325,Teachers:[A],Capacity:1/1
+    n-next page, l-last page, q-quit
+- q
+- back # 退出学生登录
+
+# 检查课程的学生列表
+- SUDO # 进入SUDO
+-
+  - clist bh00000001 1 10 # TODO: 多几门课
+  - |
+    Page:1
+    1.18370000,studa
+    n-next page, l-last page, q-quit
+- q
+
+- back # 退出SUDO
+
+-
+  - login -s 110101201103079910 a12345 # 登录 studa
+  - Login success.
+
+# 退课
+-
+  - dropc bh6 # 课程号不存在
+  - Course does not exist.
+-
+  - dropc bh00000006 # 未选过该课程
+  - The course has not been selected.
+-
+  - dropc bh00000001
+  - Drop out successful.
+# 检查一下学生的选课列表
+-
+  - myc 1 100
+  - Course does not exist.
+
+
+# 学生多选一点课
+-
+  - getc bh00000002 # ======================= studa -> 02 oop6326
+  - Course chosen success.
+-
+  - getc bh00000006 # ======================= studa -> 06 oop6330
+  - Course chosen success.
+-
+  - getc bh00000003 # ======================= studa -> 03 oop6327
+  - Course chosen success.
+-
+  - myc 1 1000 # 测试studa的选课列表
+  - |
+    Page:1
+    1.CID:bh00000002,Name:oop6326,Teachers:[A,B,10086],Capacity:1/100
+    2.CID:bh00000003,Name:oop6327,Teachers:[A,B,C],Capacity:1/100
+    3.CID:bh00000006,Name:oop6330,Teachers:[A,B],Capacity:1/100
+    n-next page, l-last page, q-quit
+- q
+- back # studa 退出登录
+
+-
+  - login -s 110101201103072057 a12345 # 登录 studc
+  - Login success.
+-
+  - getc bh00000002 # ======================= studc -> 02 oop6326
+  - Course chosen success.
+-
+  - myc 1 100
+  - |
+    Page:1
+    1.CID:bh00000002,Name:oop6326,Teachers:[A,B,10086],Capacity:2/100
+    n-next page, l-last page, q-quit
+- q
+- back # studc 退出登录
+
+-
+  - login -s 110101201103071134 a12345 # 登录 studb
+  - Login success.
+-
+  - getc bh00000002 # ======================= studb -> 02 oop6326
+  - Course chosen success.
+- back
+
+# 现在02 oop6326被3人选修了，现在检查oop6326的学生列表
+- SUDO
+- 
+  - clist bh00000002 1 1000
+  - |
+    Page:1
+    1.18370000,studa
+    2.18370001,studb
+    3.18370002,studc
+    n-next page, l-last page, q-quit
+- q
+
+# 测试不同大写情况的BH的课程的排序
+
+# 这三个在计划之外，但是只会影响后面的一点测试。
+- nc Bh00000066 oop6667 [] 100 # 2 （单单在这三个里面的排序）======
+- nc bh00000060 oop6666 [] 100 # 3  ==========================
+- nc BH00000055 oop6668 [] 100 # 1  ==========================
+
+- back
+
+-
+  - login -t 110101199003078670 a12345
+  - Login success.
+
+
+# test gc -all & 大小写排序
+
+-
+  - gc -all 1 1000 # 注意，大写字母的ascii较小，字典序在前。
+  - |
+    Page:1
+    1.CID:BH00000055,Name:oop6668,Teachers:[],Capacity:0/100
+    2.CID:Bh00000066,Name:oop6667,Teachers:[],Capacity:0/100
+    3.CID:bh00000000,Name:oop6324,Teachers:[A,10086],Capacity:0/0
+    4.CID:bh00000001,Name:oop6325,Teachers:[A],Capacity:0/1
+    5.CID:bh00000002,Name:oop6326,Teachers:[A,B,10086],Capacity:3/100
+    6.CID:bh00000003,Name:oop6327,Teachers:[A,B,C],Capacity:1/100
+    7.CID:bh00000004,Name:oop6328,Teachers:[A,B],Capacity:0/100
+    8.CID:bh00000005,Name:oop6329,Teachers:[A,B],Capacity:0/100
+    9.CID:bh00000006,Name:oop6330,Teachers:[A,B],Capacity:1/100
+    10.CID:bh00000060,Name:oop6666,Teachers:[],Capacity:0/100
+    n-next page, l-last page, q-quit
+- q
+
+- QUIT
