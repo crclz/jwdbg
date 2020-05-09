@@ -198,9 +198,9 @@ data:
 -
   - udc bh00000222 -t [10001] # 这里隐含了判断顺序
   - Course does not exist.
--
-  - udc bh00000000 -t [,10001] # TODO 列表解析错误应该输出什么？input-illegal or update-fail
-  - Input illegal.
+# -
+#   - udc bh00000000 -t [,10001] # TODO 列表解析错误应该输出什么？input-illegal or update-fail
+#   - Input illegal.
 -
   - udc bh00000000 -t [10001,1000] # 教师号非法
   - Update fail.
