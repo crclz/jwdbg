@@ -12,6 +12,15 @@
 
 ## NDbg
 [NDbg](./ndbg-readme.md)是jwdbg的升级版。解决了jwdbg的[局限性](#局限性)。当遇到这些局限性的时候，请考虑NDbg。
+
+## 编译的测试
+鉴于官方的测试会对代码做出去掉package、去掉非java import等操作，为了能够测试是否可以编译，可以进行以下操作：
+
+用法：
+`python Format.py [src]`
+将`[src]`及其子目录下的.java代码提取出来，删除其中的package以及非java开头的import语句，并输出到Format.py所在的目录下
+
+`Format.py`由 @HolmiumTS 提供，#2
  
 
 ## 贡献者
