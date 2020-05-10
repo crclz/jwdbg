@@ -149,21 +149,22 @@ for i in range(len(actual_contents)):
         print(
             f"{Fore.CYAN}================ diff (difflib, 如果上面看不清楚，可以看这里) ============={RESET_ALL}")
 
-        k = difflib.Differ().compare(expected.splitlines(
-            keepends=False), actual.splitlines(keepends=False))
+        if expected!=None:
+            k = difflib.Differ().compare(expected.splitlines(
+                keepends=False), actual.splitlines(keepends=False))
 
-        diff_info = '\n'.join(k)
+            diff_info = '\n'.join(k)
 
-        print(diff_info)
-        print("=============================================")
-        print()
-        # d = difflib.HtmlDiff()
-        # file = d.make_file(expected.splitlines(
-        #     keepends=False), actual.splitlines(keepends=False))
-        # table = d.make_table(expected.splitlines(
-        #     keepends=False), actual.splitlines(keepends=False))
-        # with open("1.diff.html","w") as f:
-        #     f.write(file)
+            print(diff_info)
+            print("=============================================")
+            print()
+            # d = difflib.HtmlDiff()
+            # file = d.make_file(expected.splitlines(
+            #     keepends=False), actual.splitlines(keepends=False))
+            # table = d.make_table(expected.splitlines(
+            #     keepends=False), actual.splitlines(keepends=False))
+            # with open("1.diff.html","w") as f:
+            #     f.write(file)
 
         # print input lines for debugging
         print(f'{Fore.YELLOW}The last command of the following lines caused the error.')
