@@ -263,7 +263,10 @@ data:
 
 # 修改课程容量。检测完后改回去。
 -
-  - udc bh00000222 -c 66 # 这里隐含了判断顺序
+  - udc bh00000222 -c Integer # 优先顺序
+  - Course does not exist.
+-
+  - udc bh00000222 -c -100 # 优先顺序
   - Course does not exist.
 -
   - udc bh00000000 -c abcdefg
