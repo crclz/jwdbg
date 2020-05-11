@@ -25,28 +25,66 @@ data:
   - nc bh12345678 oop_6324 [10086,10001] 1 [1-16]2,3
   - Course add illegal.
 
-# 教师列表格式错误。TODO 等明确通知不会出现这种偏的测试
-# -
-#   - nc bh12345678 oop6324 [ 1
-#   - Input illegal.
-# -
-#   - nc bh12345678 oop6324 ] 1
-#   - Input illegal.
-# -
-#   - nc bh12345678 oop6324 []] 1
-#   - Input illegal.
-# -
-#   - nc bh12345678 oop6324 [[,]] 1
-#   - Input illegal.
-# -
-#   - nc bh12345678 oop6324 [,] 1
-#   - Input illegal.
-# -
-#   - nc bh12345678 oop6324 [10086,,10001] 1
-#   - Input illegal.
-# -
-#   - nc bh12345678 oop6324 [10086,10001,] 1
-#   - Input illegal.
+# 教师列表格式错误
+-
+  - nc bh12345678 oop6324 [ 1 [5-5]5,5
+  - Input illegal.
+-
+  - nc bh12345678 oop6324 ] 1 [5-5]5,5
+  - Input illegal.
+-
+  - nc bh12345678 oop6324 []] 1 [5-5]5,5
+  - Input illegal.
+-
+  - nc bh12345678 oop6324 [[,]] 1 [5-5]5,5
+  - Input illegal.
+-
+  - nc bh12345678 oop6324 [,] 1 [5-5]5,5
+  - Input illegal.
+-
+  - nc bh12345678 oop6324 [10086,,10001] 1 [5-5]5,5
+  - Input illegal.
+-
+  - nc bh12345678 oop6324 [10086,10001,] 1 [5-5]5,5
+  - Input illegal.
+
+# 上课时间格式错误
+-
+  - nc bh12345600 oop6324 [10001] 6 [5-5]5,
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 [5-5],
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 [
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 [5-5]]5,5
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 [5--5]5,5
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 [5--5]5,5
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 [5-5]5,5[6-6]6,6
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 5,5[5-5]5,5
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 5,5[5-5]
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 [55]5,5
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 [5-]5,5
+  - Input illegal.
+-
+  - nc bh12345600 oop6324 [10001] 6 [-5]5,5
+  - Input illegal.
 
 
 # 教师列表教师号非法
