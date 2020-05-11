@@ -1,6 +1,6 @@
 # jw06数据
 
-## input-illegal
+## input-illegal问题
 
 https://shimo.im/docs/293DVZBEeBuLFRk4/read
 
@@ -16,11 +16,12 @@ https://shimo.im/docs/293DVZBEeBuLFRk4/read
 所以，测试数据应该对文档中难以界定的错误，采用`input-illegal`。
 
 ## jw06.yml
-本文件未设置以下测试：
-- 教师列表格式错位于 （格式问题，就是类似于`[[[[`）
-- 上课时间格式错误
+本文件未包含：
 - 特别偏的测试，例如`[10001,]`
 - 缺少参数、参数错误
+
+## jw06-arg.yml
+缺少参数、参数错误的测试
 
 ### 阅读测试数据
 
