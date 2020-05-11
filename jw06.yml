@@ -38,15 +38,16 @@ data:
 -
   - nc bh12345678 oop6324 [[,]] 1 [5-5]5,5
   - Input illegal.
--
-  - nc bh12345678 oop6324 [,] 1 [5-5]5,5
-  - Input illegal.
--
-  - nc bh12345678 oop6324 [10086,,10001] 1 [5-5]5,5
-  - Input illegal.
--
-  - nc bh12345678 oop6324 [10086,10001,] 1 [5-5]5,5
-  - Input illegal.
+# 有争议
+# -
+#   - nc bh12345678 oop6324 [,] 1 [5-5]5,5
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 [10086,,10001] 1 [5-5]5,5
+#   - Input illegal.
+# -
+#   - nc bh12345678 oop6324 [10086,10001,] 1 [5-5]5,5
+#   - Input illegal.
 
 # 上课时间格式错误
 -
