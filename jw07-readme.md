@@ -24,10 +24,3 @@ https://shimo.im/docs/293DVZBEeBuLFRk4/read
 
 ## jw07-arg.yml
 缺少参数、参数错误的测试
-
-### 阅读测试数据
-
-可以借助下图来更好的理解测试数据
-
-课程的关系如图:
-![jw07.yml的课程时间冲突示意图](jw07-period.jpg)
