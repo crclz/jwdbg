@@ -1,4 +1,4 @@
-name: crclz's jw06 ARGUMENT test
+name: crclz's jw07 ARGUMENT test
 
 data:
 
@@ -62,29 +62,29 @@ data:
 # 1级命令行
 -
   - ""
-  - Input illegal.
+  - Error:Input illegal.
 -
   - sudo
-  - Input illegal.
+  - Error:Input illegal.
 -
   - sUDO
-  - Input illegal.
+  - Error:Input illegal.
 
 # login 少参数
 -
   - login
-  - Input illegal.
+  - Error:Input illegal.
 -
   - login -s
-  - Input illegal.
+  - Error:Input illegal.
 -
   - login -t 110101aaaaaaaaaaaa # 少参数比身份证不存在优先
-  - Input illegal.
+  - Error:Input illegal.
 
 # login 错参数
 -
   - login -net 110101aaaaasdasda aasd23456
-  - Input illegal.
+  - Error:Input illegal.
 
 
 # SUDO状态下
@@ -92,61 +92,61 @@ data:
 
 - 
   - ""
-  - Input illegal.
+  - Error:Input illegal.
 -
   - csgo
-  - Input illegal.
+  - Error:Input illegal.
 
 # np少参数
 -
   - np
-  - Input illegal.
+  - Error:Input illegal.
 -
   - np -t
-  - Input illegal.
+  - Error:Input illegal.
 -
   - np -s
-  - Input illegal.
+  - Error:Input illegal.
 -
   - np -t soldier-76
-  - Input illegal.
+  - Error:Input illegal.
 -
   - np -t soldier-76 110101aaaaaa
-  - Input illegal.
+  - Error:Input illegal.
 
 # np 错参数
 -
   - np -o soldier-76 510122int 183700000001
-  - Input illegal.
+  - Error:Input illegal.
 
 
 # nc
 -
   - nc
-  - Input illegal.
+  - Error:Input illegal.
 -
   - nc BH111
-  - Input illegal.
+  - Error:Input illegal.
 -
   - nc BH111 oo-p [
-  - Input illegal.
+  - Error:Input illegal.
 -
   - nc BH111 oop012 5
-  - Input illegal.
+  - Error:Input illegal.
 
 # udc
 -
   - udc
-  - Input illegal.
+  - Error:Input illegal.
 -
   - udc BH01
-  - Input illegal.
+  - Error:Input illegal.
 -
   - udc BH01 -n
-  - Input illegal.
+  - Error:Input illegal.
 -
   - udc BH02 -qq 5
-  - Input illegal.
+  - Error:Input illegal.
 
 # clist
 
@@ -154,20 +154,20 @@ data:
 
 -
   - clist
-  - Input illegal.
+  - Error:Input illegal.
 
 # -
 #   - clist BH99
-#   - Course does not exist. # 根据jw5 PDF，clist是不明确的特例。
+#   - Error:Course does not exist. # 根据jw5 PDF，clist是不明确的特例。
 # -
 #   - clist BH100 5
-#   - Course does not exist.
+#   - Error:Course does not exist.
 -
   - clist BH7 Int Int
-  - Course does not exist.
+  - Error:Course does not exist.
 -
   - clist BH750 1 10
-  - Course does not exist.
+  - Error:Course does not exist.
 
 - back
 
@@ -178,39 +178,39 @@ data:
   - Login success.
 -
   - ""
-  - Input illegal.
+  - Error:Input illegal.
 -
   - gc
-  - Input illegal.
+  - Error:Input illegal.
 -
   - gc -id
-  - Input illegal.
+  - Error:Input illegal.
 -
   - gc -key
-  - Input illegal.
+  - Error:Input illegal.
 -
   - gc -key oop
-  - Input illegal.
+  - Error:Input illegal.
 -
   - gc -key oop x y # 这里是测试jw5 pdf最后的“如果本来该输⼊数字的地⽅输⼊了字⺟...”
-  - Input illegal.
+  - Error:Input illegal.
 -
   - gc -key oop 2 x
-  - Input illegal.
+  - Error:Input illegal.
 -
   - gc -key oop 2
-  - Input illegal.
+  - Error:Input illegal.
 -
   - gc -wrong 5 5 5 5 5 5
-  - Input illegal.
+  - Error:Input illegal.
 
 # myc
 -
   - myc
-  - Input illegal.
+  - Error:Input illegal.
 -
   - myc 7
-  - Input illegal.
+  - Error:Input illegal.
 
 
 - back # 教师退出登录
@@ -222,22 +222,22 @@ data:
   - Login success.
 -
   - getc
-  - Input illegal.
+  - Error:Input illegal.
 -
   - dropc
-  - Input illegal.
+  - Error:Input illegal.
 -
   - myc
-  - Input illegal.
+  - Error:Input illegal.
 -
   - myc 80
-  - Input illegal.
+  - Error:Input illegal.
 -
   - DROPOUT
-  - Input illegal.
+  - Error:Input illegal.
 -
   - DROPOUT aaaaa
-  - Input illegal.
+  - Error:Input illegal.
 - back
 
 - QUIT
