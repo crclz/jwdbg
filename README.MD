@@ -34,6 +34,7 @@
 版本的变更将通过**release**的方式发出。当你watch了本项目的时候，github就会给你发站内通知+邮件通知。我发现手机qq的新邮件推送挺及时的。
 
 ## 附带数据
+- [jw07数据详情](./jw07-readme.md)
 - [jw06数据详情](./jw06-readme.md)
 - [jw05数据详情](./jw05-readme.md)
 - jw4数据（from crclz）`jw04.yml`
